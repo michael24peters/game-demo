@@ -1,0 +1,32 @@
+name: game-demo
+on:
+  push:
+    branches:
+      - 'main'
+      - 'stats'
+
+jobs:
+  Format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: pipx run pre-commit run --all-files --show-diff-on-failure
+  Tests:
+    needs: Format
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version:
+          - "3.8"
+          - "3.12"
+    steps:
+      - name: Check Python ${{ matrix.python-version }}
+        uses: actions/checkout@v4
+
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          allow-prereleases: true
+      - run: pipx run nox -s tests -- -v

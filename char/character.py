@@ -44,7 +44,7 @@ class Character:
 
         self.hidden_skills = {
             'secret_history': 0,
-            'metaphysics': 0
+            'metaphysics': 0,
             'sorcery': 0,
             'mental_resistance': 0
         }

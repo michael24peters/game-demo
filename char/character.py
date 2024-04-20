@@ -69,5 +69,4 @@ class Character:
 
         stats = {'STR': 6.0, 'INT': 6.0, 'WIS': 6.0, 'DEX': 6.0, 'CON': 6.0, 'CHA': 6.0}
         points = 25
-        if self.background=="orphan":
-
+#        if self.background=="orphan":

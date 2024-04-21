@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.0.4
+- Added methods for Character
+  - create_character() (WIP)
+  - __str__()
+
 ## v0.0.3
 - Added noxfile.py
 - Added pyproject.toml

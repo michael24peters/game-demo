@@ -26,6 +26,10 @@ class Character:
     -------
     create_character():
         Generates main character (hero) from User input.
+    update_stat(stat):
+        Increases or decreases Character stat by inputted amount.
+    supermemo(q, n, EF, I):
+        Track progression through spaced repitiion
     """
 
     def __init__(self, name = "", background = ""):
@@ -92,6 +96,7 @@ class Character:
 
         points = 25
 
+        # ====Background====
         while True:
             if self.background in ['orphan', 'farmer', 'noble'] != "": break
             background = input(f"What is your background? Orphan, farmer, or noble? ")
@@ -101,6 +106,7 @@ class Character:
 
             print("Invalid background.", end=" ")
 
+        # ====Stats====
         print(f"You have {points} points to create your character.")
         print(f"You may use these points to increase your six attributes or starting skills.")
         print(f"Below is your character sheet. Use it as a reference.")
@@ -113,30 +119,14 @@ class Character:
                 print(f"wish to increase or decrease the score by, e.g. 'STR +2', 'history +1', 'INT -1'.")
                 print(f"Note that the range for attributes is 6 to 15 and for skills 0 to 3.")
                 print(f"Points remaining: {points}")
-            show = True
             
             stat = input().split(' ') # user must input STAT, a single space, then the value
+            stat[1] = int(stat[1])
 
-            # Attributes
-            if len(stat[0]) == 3:
-                try: 
-                    if 6 <= self.attr[stat[0].upper()] + int(stat[1]) <= 15: 
-                        self.attr[stat[0].upper()] += int(stat[1])
-                        points -= int(stat[1])
-                    else: show = False
-                except: 
-                    print("Invalid input. Try again.") 
-                    show = False  
-            # Skills
-            else:
-                try:
-                    if 0 <= self.skills[stat[0].lower()] + int(stat[1]) <= 3:
-                        self.skills[stat[0].lower()] += int(stat[1])
-                        points -= int(stat[1])
-                    else: show = False
-                except: 
-                    print("Invalid input. Try again.")
-                    show = False
+            show = self.update_stat(*stat)
+            if show: points -= stat[1]
+            else: print("Invalid input. Try again.")
+
             if points == 0:
                 flag = input(f"Finished? (Y/N/Restart) ")
                 if flag in {"Y","y","yes","Yes","YES"}: break
@@ -145,13 +135,55 @@ class Character:
                     self.attr = default_attr 
                     self.skills = default_skills
                     points = 25
-        # Name
+        
+        # ====Name====
         flag = False
         self.name = input("Finally, What is your name? ")
         while True:
             flag = input(f"Your name is {self.name}. Confirm? (Y/N) ")
             if flag in {"Y","y","yes","Yes","YES"}: break
             self.name = input("What is your name? ")
+
+    def update_stat(self, stat, x):
+        """
+        Increases or decreases Character stat[0] value by an amount equal to stat[1].
+
+        Parameters
+        ----------
+        stat : str
+            Character stat name
+        x : float
+            Amount to change stat
+
+        Returns
+        -------
+        bool
+            Successful change of stat (True) or not (False)
+
+        Examples
+        --------
+        >>> update_stat(['STR', 2]) # Increases STR attr by 2
+        >>> update_stat('combat', .15) # Increases combat skill by .15
+        """
+        done = True
+        # Attribute
+        if len(stat) == 3:
+            try: 
+                if 6.0 <= self.attr[stat.upper()] + x <= 18.0: self.attr[stat.upper()] += x
+                else: done = False
+            except: 
+                done = False  
+        # Skill
+        else:
+            try:
+                if stat in self.skills['languages']:
+                    if 0.0 <= self.skills['languages'][stat.lower()] + x <= 6.0: self.skills['languages'][stat.lower()] += x
+                    else: done = False
+                else:
+                    if 0.0 <= self.skills[stat.lower()] + x <= 6.0: self.skills[stat.lower()] += x
+                    else: done = False
+            except: done = False
+        return done
 
     def __str__(self):
         """
@@ -174,14 +206,13 @@ class Character:
         # Languages
         str += "| langauges:\n"
         for key, val in self.skills['languages'].items():
-            if(val>0): str += f"|   {key} {val}\n"
+            str += f"|   {key} {val}\n"
         # Formatting
         str += "+----------------------+\n"
         return str
 
     def supermemo(self, q, n, EF, I):
-        """Updates progression of learning through spaced repitition.
-
+        """
         supermemo() uses the SuperMemo2 algorithm to track progression through spaced repitition [1]. 
         It takes in the previous progress of the item to learn and updates the values based on the 
         grade of the learner.
@@ -237,9 +268,7 @@ class Character:
         if EF < 1.3: EF = 1.3
         
         return (n, EF, I)
-    
 
-    
 class NPC(Character):
     def __init__(self, 
     name, 
@@ -255,8 +284,12 @@ class NPC(Character):
         self.hidden_skills = hidden_skills
 
 #hero = Character()
-test = Character(name="Test", background = "orphan")
+#test = Character(name="Test", background = "orphan")
 #mentor = NPC("Anaheim", background='mentor')
 #print(hero.supermemo(q=5, n=0, EF=1.3, I=0))
 #print(mentor.supermemo(4, 2, 1.5, 8))
-print(test)
+#print(test)
+#test.update_stat(*['STR', 2])
+#test.update_stat('combat', .15)
+#print(test)
+#print(hero)

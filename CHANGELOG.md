@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.0.6
+- Updated docstrings
+- Added update_stat()
+- Moved create_character() functionality to update_stat()
+- Fixed: can now add skill points to languages
+- Changed create_character
+  - Displays all languages
+
 ## v0.0.5
 - Added NPC subclass
   - __init__()

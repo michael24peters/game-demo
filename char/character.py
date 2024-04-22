@@ -365,15 +365,3 @@ class NPC(Character):
         self.attr = attr
         self.skills = skills
         self.hidden_skills = hidden_skills
-
-
-# hero = Character()
-# test = Character(name="Test", background = "orphan")
-# mentor = NPC("Anaheim", background='mentor')
-# print(hero.supermemo(q=5, n=0, EF=1.3, I=0))
-# print(mentor.supermemo(4, 2, 1.5, 8))
-# print(test)
-# test.update_stat(*['STR', 2])
-# test.update_stat('combat', .15)
-# print(test)
-# print(hero)

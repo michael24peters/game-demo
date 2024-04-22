@@ -1,4 +1,8 @@
 # Changelog
+## v0.0.7
+- Reorganized files
+- Fixed sphinx documentation
+- Minor fixes
 
 ## v0.0.6
 - Updated docstrings
@@ -7,6 +11,7 @@
 - Fixed: can now add skill points to languages
 - Changed create_character
   - Displays all languages
+- Added tests
 
 ## v0.0.5
 - Added NPC subclass

@@ -1,6 +1,6 @@
 # You will need to run `export PYTHONPATH=/path/to/parent` in order to get this to run properly
 # Even so, this will make it work for local runs but not GitHub Actions.
-from char.character import Character, NPC
+from char.character import NPC, Character
 
 
 def test_create_init():
@@ -23,8 +23,8 @@ def test_create_init():
         "history": 0,
         "herbalism": 0,
         "medicine": 0,
-        "religion, sol": 0,
-        "religion, deivos": 0,
+        "religion_sol": 0,
+        "religion_deivos": 0,
         "languages": {
             "central": 1,
             "northern": 0,

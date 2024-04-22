@@ -341,8 +341,8 @@ class NPC(Character):
                 "history": 0,
                 "herbalism": 0,
                 "medicine": 0,
-                "religion, sol": 0,
-                "religion, deivos": 0,
+                "religion_sol": 0,
+                "religion_deivos": 0,
                 "languages": {
                     "central": 1,
                     "northern": 0,

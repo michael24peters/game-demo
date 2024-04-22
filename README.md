@@ -2,7 +2,7 @@
 Final Project for SE4Sci-S2024 course
 
 ## Concept
-This project details the process for making game using concepts learned in class. The game is about the training of a hero. Users play as the aspiring hero and make decisions, talk to people, go on training quests, and encounter events that will shape who they become. These characteristics are represented as stats -- much as you might see in a typical role-playing game -- that are raised (or lowered) as decisions are made and events occur.
+This project details the process for making a game using concepts learned in class. The game is about the training of a hero. Users play as the aspiring hero and make decisions, talk to people, go on training quests, and encounter events that will shape who they become. These characteristics are represented as stats -- much as you might see in a typical role-playing game -- that are raised (or lowered) as decisions are made and events occur.
 
 ## Objective
 Creating a game is well beyond the scope of this project. Too many components and too few members are involved to accomplish such a feat. Instead, this report will detail the game concept, design goals, backend work, and everything involved in setting up this game for an easier future. There will also be a short demo provided for an example of how testing will occur, what branch conventions will be used, and how object-oriented design.
@@ -19,7 +19,7 @@ Eventually, a story emerges from their training, and the journey ends with the i
 Sometimes events will directly impact the character stats, sometimes certain dialogue options will unlock future outcomes, sometimes the dialogue is just interesting, sometimes a non-playable character will say something useful about the world that you can use later on.
 
 ## Content
-The game was be built using Python and operates out of the terminal. This archaic approach is used to focus on learning design principles, but this game could be expanded to operate out of a game engine.
+The game was built using Python and operates out of the terminal. This archaic approach is used to focus on learning design principles, but this game could be expanded to operate out of a game engine.
 
 Much of the game itself is programmed through a great deal of if-else and try-catch blocks. This is a sample of the much more extensive and complex blocks that will be needed for branching into different paths of dialogue and sub-events. Each “scenario” may be broken into a class (or function and sub-functions), which walk through the story of the main character. With the amount of dialogue present, this game could quickly spiral out of control. 
 

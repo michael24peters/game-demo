@@ -1,4 +1,5 @@
 # You will need to run `export PYTHONPATH=/path/to/parent` in order to get this to run properly
+# Even so, this will make it work for local runs but not GitHub Actions.
 from char.character import Character, NPC
 
 

@@ -14,8 +14,7 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
-
-# pychache
+.ruff_cache/
 __pycache__/
 
 # DS_STORE

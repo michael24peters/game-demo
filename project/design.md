@@ -1,6 +1,6 @@
 # Game Design
 ## Concept
-This game is about the training of a hero (or villain!). Users play as the aspiring hero and make decisions, talk to people, go on training quests, and encounter events that will shape who they become. These characteristics are represented as stats -- much as you might see in a typical role-playing game -- that are raised (or lowered) as decisions are made and events occur.
+This game is about the training of a hero. Users play as the aspiring hero and make decisions, talk to people, go on training quests, and encounter events that will shape who they become. These characteristics are represented as stats -- much as you might see in a typical role-playing game -- that are raised (or lowered) as decisions are made and events occur.
 
 ## Overview
 The player chooses a background -- orphan, farmer, or noble -- and is brought under the tutelage of a mentor -- an enterprising mercenary, a cunning scholar, or a nature-loving monk.

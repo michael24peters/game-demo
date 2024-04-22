@@ -1,9 +1,5 @@
 import math
 
-# TODO: NPC subclass that generates NPC from declaration
-# TODO: calculate changes in stats and skills, set by Anki-style algorithm. Leave it to later systems to select which system was triggered.
-
-
 class Character:
     """
     Creates a Character with a set of characteristics and attributes that define them.

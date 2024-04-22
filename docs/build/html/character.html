@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>character module &#8212; game-demo  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="char" href="modules.html" />
+
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+
+
+
+
+
+  </head><body>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+
+
+          <div class="body" role="main">
+
+  <section id="module-character">
+<span id="character-module"></span><h1>character module<a class="headerlink" href="#module-character" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="character.Character">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">character.</span></span><span class="sig-name descname"><span class="pre">Character</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/character.html#Character"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#character.Character" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Creates a Character with a set of characteristics and attributes that define them.
+The Character class also contains the functionality needed to view, update, and use these statistics.</p>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h2>
+<dl class="simple">
+<dt>stats<span class="classifier">dict</span></dt><dd><p>Six defining attributes of the Character</p>
+</dd>
+<dt>hp<span class="classifier">int</span></dt><dd><p>Hit Points (HP), which represents Player health and defense in combat.</p>
+</dd>
+<dt>skills<span class="classifier">dict</span></dt><dd><p>Skills the User can progress through play</p>
+</dd>
+<dt>hidden_skills<span class="classifier">dict</span></dt><dd><p>Skills the User cannot see until unlocked/revealed</p>
+</dd>
+<dt>background<span class="classifier">string</span></dt><dd><p>Character background prior to game start</p>
+</dd>
+<dt>name<span class="classifier">str</span></dt><dd><p>Name of Character</p>
+</dd>
+</dl>
+</section>
+<section id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading">¶</a></h2>
+<dl class="simple">
+<dt>create_character():</dt><dd><p>Generates main character (hero) from User input.</p>
+</dd>
+<dt>update_stat(stat):</dt><dd><p>Increases or decreases Character stat by inputted amount.</p>
+</dd>
+<dt>supermemo(q, n, EF, I):</dt><dd><p>Track progression through spaced repitiion</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="character.Character.create_character">
+<span class="sig-name descname"><span class="pre">create_character</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/character.html#Character.create_character"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#character.Character.create_character" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a character within the game.</p>
+<p>The Character class constructor sets the default characteristics of the Character, plus the User
+chosen background. create_character() completes this process by giving a series of user-inputted
+choices for stat adjustments, allocating skills points, and so on.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="character.Character.supermemo">
+<span class="sig-name descname"><span class="pre">supermemo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">EF</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">I</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/character.html#Character.supermemo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#character.Character.supermemo" title="Link to this definition">¶</a></dt>
+<dd><p>supermemo() uses the SuperMemo2 algorithm to track progression through spaced repitition [1].
+It takes in the previous progress of the item to learn and updates the values based on the
+grade of the learner.</p>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>q<span class="classifier">int</span></dt><dd><p>User grade ranging from 1-5:
+5 - perfect response
+4 - correct response after a hesitation
+3 - correct response recalled with serious difficulty
+2 - incorrect response; where the correct one seemed easy to recall
+1 - incorrect response; the correct one remembered
+0 - complete blackout.</p>
+</dd>
+<dt>n<span class="classifier">int</span></dt><dd><p>Repitition number</p>
+</dd>
+<dt>EF<span class="classifier">float</span></dt><dd><p>Easiness factor</p>
+</dd>
+<dt>I<span class="classifier">int</span></dt><dd><p>Interval number</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>int</dt><dd><p>Updated value of repitition number, n</p>
+</dd>
+<dt>float</dt><dd><p>Updated value of easiness factor, EF</p>
+</dd>
+<dt>int</dt><dd><p>Updated value of interval, I</p>
+</dd>
+</dl>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h3>
+<p>[1] “SuperMemo2”, <a class="reference external" href="https://www.supermemo.com/en/blog/application-of-a-computer-to-improve-the-results-obtained-in-working-with-the-supermemo-method">https://www.supermemo.com/en/blog/application-of-a-computer-to-improve-the-results-obtained-in-working-with-the-supermemo-method</a></p>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">supermemo</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">EF</span><span class="o">=</span><span class="mf">1.3</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># New card answered perfectly</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">EF</span><span class="o">=</span><span class="mf">1.4</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">supermemo</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> <span class="c1"># Encountered card answered with a grade of 4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">EF</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="character.Character.update_stat">
+<span class="sig-name descname"><span class="pre">update_stat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/character.html#Character.update_stat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#character.Character.update_stat" title="Link to this definition">¶</a></dt>
+<dd><p>Increases or decreases Character stat[0] value by an amount equal to stat[1].</p>
+<section id="id1">
+<h3>Parameters<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>stat<span class="classifier">str</span></dt><dd><p>Character stat name</p>
+</dd>
+<dt>x<span class="classifier">float</span></dt><dd><p>Amount to change stat</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h3>Returns<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>bool</dt><dd><p>Successful change of stat (True) or not (False)</p>
+</dd>
+</dl>
+</section>
+<section id="id3">
+<h3>Examples<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">update_stat</span><span class="p">([</span><span class="s1">&#39;STR&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span> <span class="c1"># Increases STR attr by 2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">update_stat</span><span class="p">(</span><span class="s1">&#39;combat&#39;</span><span class="p">,</span> <span class="mf">.15</span><span class="p">)</span> <span class="c1"># Increases combat skill by .15</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="character.NPC">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">character.</span></span><span class="sig-name descname"><span class="pre">NPC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skills</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_skills</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/character.html#NPC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#character.NPC" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#character.Character" title="character.Character"><code class="xref py py-class docutils literal notranslate"><span class="pre">Character</span></code></a></p>
+</dd></dl>
+
+</section>
+
+
+          </div>
+
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">game-demo</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">char</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">character module</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">char</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">char</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Michael Peters.
+
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+
+      |
+      <a href="_sources/character.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+
+
+
+  </body>
+</html>

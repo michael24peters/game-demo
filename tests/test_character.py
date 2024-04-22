@@ -1,0 +1,55 @@
+# You will need to run `export PYTHONPATH=/path/to/parent` in order to get this to run properly
+# Even so, this will make it work for local runs but not GitHub Actions.
+from char.character import NPC, Character
+
+
+def test_create_init():
+    test = Character(name="Test", background="orphan")
+
+    assert test.name == "Test"
+    assert test.background == "orphan"
+    assert test.attr == {
+        "STR": 6.0,
+        "INT": 6.0,
+        "WIS": 6.0,
+        "DEX": 6.0,
+        "CON": 6.0,
+        "CHA": 6.0,
+    }
+    assert test.skills == {
+        "combat": 0,
+        "social": 0,
+        "athletics": 0,
+        "history": 0,
+        "herbalism": 0,
+        "medicine": 0,
+        "religion_sol": 0,
+        "religion_deivos": 0,
+        "languages": {
+            "central": 1,
+            "northern": 0,
+            "eastern": 0,
+            "southern": 0,
+            "western": 0,
+        },
+    }
+
+
+def test_update_stats():
+    test = Character(name="Test", background="orphan")
+
+    test.update_stat(*["STR", 2])
+    assert test.attr["STR"] == 8
+    test.update_stat("combat", 0.15)
+    assert test.skills["combat"] == 0.15
+    test.update_stat("northern", 0.5)
+    assert test.skills["languages"]["northern"] == 0.5
+    test.update_stat("southern", 2)
+    assert test.skills["languages"]["southern"] == 2
+
+
+def test_NPC():
+    mentor = NPC("Anaheim", background="mentor")
+
+    assert mentor.name == "Anaheim"
+    assert mentor.background == "mentor"

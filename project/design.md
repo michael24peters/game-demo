@@ -1,6 +1,6 @@
 # Game Design
 ## Concept
-This game is about the training of a hero (or villain!). Users play as the aspiring hero and make decisions, talk to people, go on training quests, and encounter events that will shape who they are. These characteristics are represented as stats -- much as you might see in a typical role-playing game -- that are raised (or lowered) as decisions are made and events occur.
+This game is about the training of a hero (or villain!). Users play as the aspiring hero and make decisions, talk to people, go on training quests, and encounter events that will shape who they become. These characteristics are represented as stats -- much as you might see in a typical role-playing game -- that are raised (or lowered) as decisions are made and events occur.
 
 ## Overview
 The player chooses a background -- orphan, farmer, or noble -- and is brought under the tutelage of a mentor -- an enterprising mercenary, a cunning scholar, or a nature-loving monk.
@@ -13,6 +13,3 @@ Sometimes events will directly impact the character stats, sometimes certain dia
 
 ## Gameplay Loop
 After the introduction, a menu appears where the User chooses what to spend the week doing. They have 20 points to allocate, roughly translating to four blocks per day. Users can choose to spend an additional 5 points past their max at the cost of their health and certain events triggering.
-
-
-

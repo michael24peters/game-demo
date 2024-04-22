@@ -6,10 +6,10 @@
 Welcome to Game Demo's documentation!
 =====================================
 
-This game is about the training of a hero. Users play as the aspiring 
-hero and make decisions, talk to people, go on training quests, and encounter events 
-that will shape who they are. These characteristics are represented as stats -- much 
-as you might see in a typical role-playing game -- that are raised (or lowered) as 
+This game is about the training of a hero. Users play as the aspiring
+hero and make decisions, talk to people, go on training quests, and encounter events
+that will shape who they are. These characteristics are represented as stats -- much
+as you might see in a typical role-playing game -- that are raised (or lowered) as
 decisions are made and events occur.
 
 .. toctree::

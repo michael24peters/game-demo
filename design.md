@@ -13,6 +13,3 @@ Sometimes events will directly impact the character stats, sometimes certain dia
 
 ## Gameplay Loop
 After the introduction, a menu appears where the User chooses what to spend the week doing. They have 20 points to allocate, roughly translating to four blocks per day. Users can choose to spend an additional 5 points past their max at the cost of their health and certain events triggering.
-
-
-

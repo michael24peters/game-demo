@@ -24,4 +24,4 @@ The project will be divided into the following semi-independent branches, which 
   - Opponent statistics
   - Combat system (relevant combat skills + situation skill + rand(1-4) vs. opponent values)
   - Fallout-style dialogue trees
-- 
+-

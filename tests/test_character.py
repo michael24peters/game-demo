@@ -1,12 +1,5 @@
-## USE FOR LOCAL IMPORTS AS NEEDED ##
-# importing sys
-# import sys
-
-# adding Folder_2/subfolder to the system path
-# sys.path.insert(0, "/Users/Michael/Documents/game-demo/char")
-## ##
-
-from char import Character, NPC
+# You will need to run `export PYTHONPATH=/path/to/parent` in order to get this to run properly
+from char.character import Character, NPC
 
 
 def test_create_init():

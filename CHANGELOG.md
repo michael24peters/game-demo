@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.0.5
+- Added NPC subclass
+  - __init__()
+- Changes to Character
+  - If name and background given in constructor args, skip create_character() and use default values
+  - __str__() now formatted to look like proper character sheet
+- Added supermemo()
+- Finished create_character()
+- Added report.md
+
 ## v0.0.4
 - Added methods for Character
   - create_character() (WIP)

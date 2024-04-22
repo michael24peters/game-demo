@@ -1,11 +1,11 @@
 import math
+# TODO: NPC subclass that generates NPC from declaration
+# TODO: calculate changes in stats and skills, set by Anki-style algorithm. Leave it to later systems to select which system was triggered.
 
 class Character:
     """
     Creates a Character with a set of characteristics and attributes that define them. 
     The Character class also contains the functionality needed to view, update, and use these statistics.
-
-    ...
 
     Attributes
     ----------
@@ -28,9 +28,9 @@ class Character:
         Generates main character (hero) from User input.
     """
 
-    def __init__(self, background):
+    def __init__(self, name = "", background = ""):
 
-        self.stats = {
+        self.attr = {
             'STR': 6.0, 
             'INT': 6.0, 
             'WIS': 6.0, 
@@ -46,8 +46,8 @@ class Character:
             'history': 0,
             'herbalism': 0,
             'medicine': 0,
-            'religion, sol': 0,
-            'religion, deivos': 0,
+            'religion_sol': 0,
+            'religion_deivos': 0,
             'languages': {'central': 1, 'northern': 0, 'eastern': 0, 'southern': 0, 'western': 0}
         }
 
@@ -58,15 +58,9 @@ class Character:
             'mental_resistance': 0
         }
         
-        if background=="orphan" or "Orphan" or "o" or "O": self.background = "orphan"
-        elif background=="farmer" or "Farmer" or "f" or "F": self.background = "farmer"
-        elif background=="noble" or "Noble" or "n" or "N": self.background = "noble"
-        else: raise Exception("Not a valid background.")
         self.background = background
-
-        self.name = ""
-
-        self.create_character()
+        self.name = name
+        if self.name == "" or background not in ['orphan', 'farmer', 'noble']: self.create_character()
 
     def create_character(self):
         """Creates a character within the game.
@@ -76,14 +70,82 @@ class Character:
         choices for stat adjustments, allocating skills points, and so on.
         """
 
-        stats = {'STR': 6.0, 'INT': 6.0, 'WIS': 6.0, 'DEX': 6.0, 'CON': 6.0, 'CHA': 6.0}
+        default_attr = {
+            'STR': 6.0, 
+            'INT': 6.0, 
+            'WIS': 6.0, 
+            'DEX': 6.0, 
+            'CON': 6.0, 
+            'CHA': 6.0
+        }
+        default_skills = {
+            'combat': 0,
+            'social': 0,
+            'athletics': 0,
+            'history': 0,
+            'herbalism': 0,
+            'medicine': 0,
+            'religion_sol': 0,
+            'religion_deivos': 0,
+            'languages': {'central': 1, 'northern': 0, 'eastern': 0, 'southern': 0, 'western': 0}
+        }
+
         points = 25
 
-        print(f"You have {points} points to create your character. You may use these points to increase your six attributes or starting skills.")
-        print(f"Enter the attribute or skill you which to increase, followed by the amount you wish to increase or decrease the score by. Note that attributes cannot fall below 6.")
-        print(self)
+        while True:
+            if self.background in ['orphan', 'farmer', 'noble'] != "": break
+            background = input(f"What is your background? Orphan, farmer, or noble? ")
+            if background in ["orphan", "Orphan", "o", "O"]: self.background = "orphan"
+            elif background in ["farmer", "Farmer", "f", "F"]: self.background = "farmer"
+            elif background in ["noble", "Noble", "n", "N"]: self.background = "noble"
 
-        # User input name
+            print("Invalid background.", end=" ")
+
+        print(f"You have {points} points to create your character.")
+        print(f"You may use these points to increase your six attributes or starting skills.")
+        print(f"Below is your character sheet. Use it as a reference.")
+
+        show = True
+        while True:
+            if show: # Character sheet + prompt + points
+                print(self)
+                print(f"Enter the attribute or skill you which to increase, followed by the amount you")
+                print(f"wish to increase or decrease the score by, e.g. 'STR +2', 'history +1', 'INT -1'.")
+                print(f"Note that the range for attributes is 6 to 15 and for skills 0 to 3.")
+                print(f"Points remaining: {points}")
+            show = True
+            
+            stat = input().split(' ') # user must input STAT, a single space, then the value
+
+            # Attributes
+            if len(stat[0]) == 3:
+                try: 
+                    if 6 <= self.attr[stat[0].upper()] + int(stat[1]) <= 15: 
+                        self.attr[stat[0].upper()] += int(stat[1])
+                        points -= int(stat[1])
+                    else: show = False
+                except: 
+                    print("Invalid input. Try again.") 
+                    show = False  
+            # Skills
+            else:
+                try:
+                    if 0 <= self.skills[stat[0].lower()] + int(stat[1]) <= 3:
+                        self.skills[stat[0].lower()] += int(stat[1])
+                        points -= int(stat[1])
+                    else: show = False
+                except: 
+                    print("Invalid input. Try again.")
+                    show = False
+            if points == 0:
+                flag = input(f"Finished? (Y/N/Restart) ")
+                if flag in {"Y","y","yes","Yes","YES"}: break
+                # Restart character creation
+                if flag in {"Restart","restart","r","R"}: 
+                    self.attr = default_attr 
+                    self.skills = default_skills
+                    points = 25
+        # Name
         flag = False
         self.name = input("Finally, What is your name? ")
         while True:
@@ -95,23 +157,106 @@ class Character:
         """
         Returns str output of Character object.
         """
+        # Formatting
+        str = "\n+----------------------+\n"
         # Name
-        str = f"Name: {self.name}\n"
+        str += f"| Name: {self.name}\n"
         # Background
-        str += f"Background: {self.background}\n\n"
+        str += f"| Background: {self.background}\n| \n"
         # Attributes
-        for key, val in self.stats.items():
+        for key, val in self.attr.items():
             # Always output floor of attributes to user.
-            str += f"{key} {math.floor(val)}\n"
-        str+="\n"
+            str += f"| {key} {math.floor(val)}\n"
+        str+="| \n"
         # Skills
         for key, val, in self.skills.items():
-            if key!="languages": str += f"{key} {val}\n"
+            if key!="languages": str += f"| {key} {val}\n"
         # Languages
-        str += "langauges:\n"
+        str += "| langauges:\n"
         for key, val in self.skills['languages'].items():
-            if(val>0): str += f"  {key} {val}\n"
+            if(val>0): str += f"|   {key} {val}\n"
+        # Formatting
+        str += "+----------------------+\n"
         return str
 
+    def supermemo(self, q, n, EF, I):
+        """Updates progression of learning through spaced repitition.
 
-hero = Character("orphan")
+        supermemo() uses the SuperMemo2 algorithm to track progression through spaced repitition [1]. 
+        It takes in the previous progress of the item to learn and updates the values based on the 
+        grade of the learner.
+
+        Parameters
+        ----------
+        q : int
+            User grade ranging from 1-5:
+            5 - perfect response
+            4 - correct response after a hesitation
+            3 - correct response recalled with serious difficulty
+            2 - incorrect response; where the correct one seemed easy to recall
+            1 - incorrect response; the correct one remembered
+            0 - complete blackout.
+        n : int
+            Repitition number
+        EF : float
+            Easiness factor
+        I : int
+            Interval number
+
+        Returns
+        -------
+        int
+            Updated value of repitition number, n
+        float
+            Updated value of easiness factor, EF
+        int
+            Updated value of interval, I
+
+        References
+        ----------
+        [1] "SuperMemo2", https://www.supermemo.com/en/blog/application-of-a-computer-to-improve-the-results-obtained-in-working-with-the-supermemo-method
+
+        Examples
+        --------
+        >>> supermemo(q=5, n=0, EF=1.3, I=0) # New card answered perfectly
+        >>> (n=0, EF=1.4, I=1)
+        >>> supermemo(4, 2, 1.5, 8) # Encountered card answered with a grade of 4
+        >>> (n=3, EF=1.5, I=12)
+        """
+
+        if q >= 3: # Correct response
+            if n == 0: I = 1
+            elif n == 1: I = 6
+            else: I = round(I * EF)
+            n+=1
+        else: # Incorrect response
+            n = 0
+            I = 1
+        
+        EF = round(EF + (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02)), 2)
+        if EF < 1.3: EF = 1.3
+        
+        return (n, EF, I)
+    
+
+    
+class NPC(Character):
+    def __init__(self, 
+    name, 
+    background=None, 
+    attr = {'STR': 6.0, 'INT': 6.0, 'WIS': 6.0, 'DEX': 6.0, 'CON': 6.0, 'CHA': 6.0}, 
+    skills = {'combat': 0, 'social': 0, 'athletics': 0, 'history': 0, 'herbalism': 0, 'medicine': 0, 'religion, sol': 0, 'religion, deivos': 0,
+            'languages': {'central': 1, 'northern': 0, 'eastern': 0, 'southern': 0, 'western': 0}}, 
+    hidden_skills = {'secret_history': 0, 'metaphysics': 0, 'sorcery': 0, 'mental_resistance': 0}):
+        self.name = name
+        self.background = background
+        self.attr = attr
+        self.skills = skills
+        self.hidden_skills = hidden_skills
+
+#hero = Character()
+test = Character(name="Test", background = "orphan")
+#mentor = NPC("Anaheim", background='mentor')
+#print(hero.supermemo(q=5, n=0, EF=1.3, I=0))
+#print(mentor.supermemo(4, 2, 1.5, 8))
+print(test)

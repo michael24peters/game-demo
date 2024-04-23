@@ -111,11 +111,12 @@ class Character:
             if self.background in ["orphan", "farmer", "noble"] != "":
                 break
             background = input("What is your background? Orphan, farmer, or noble? ")
-            if background in ["orphan", "Orphan", "o", "O"]:
+            background = background.lower()
+            if background in ["orphan", "o"]:
                 self.background = "orphan"
-            elif background in ["farmer", "Farmer", "f", "F"]:
+            elif background in ["farmer", "f"]:
                 self.background = "farmer"
-            elif background in ["noble", "Noble", "n", "N"]:
+            elif background in ["noble", "n"]:
                 self.background = "noble"
 
             print("Invalid background.", end=" ")
